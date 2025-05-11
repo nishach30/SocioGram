@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../components/ui/button'
+import { Button, buttonVariants } from '../../components/ui/button'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -14,10 +14,13 @@ import {
 import { Input } from "../../components/ui/input"
 import { z } from "zod"
 import { SignupValidation } from '../../lib/validation'
+import Loader from '../../components/shared/Loader'
+import { Link } from 'react-router-dom'
+import { createUserAccount } from '../../lib/appwrite/api'
 
 
 const SignUpForm = () => {
-  
+    const isLoading = false;
     // 1. Define your form.
     const form = useForm<z.infer<typeof SignupValidation>>({
       resolver: zodResolver(SignupValidation),
@@ -30,36 +33,84 @@ const SignUpForm = () => {
     })
    
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof SignupValidation>) {
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
-      console.log(values)
+   async function onSubmit(values: z.infer<typeof SignupValidation>) {
+    const newUser= await createUserAccount(values)
+    console.log(newUser)
     }
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col">
+      <div className="flex-center flex-col"> 
+        {/* sm:w-420 */}
         <img src="/assets/images/logo.svg" alt="logo"/>
-      </div>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        <h2 className='text-white h3-bold md:h2-bold pt-5 sm:pt-12'>Create a new account</h2>
+        <p className='text-white small-medium md:base-regular mt-2'>
+          To use SocioGram, please enter your details:
+        </p>
+      
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
+      <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }: any) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel className="form-label">Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Example:Leo Singh" type='text' className='shad-input'  {...field}/>
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+      <FormField
+          control={form.control}
+          name="username"
+          render={({ field }: any) => (
+            <FormItem>
+              <FormLabel className="form-label">Username</FormLabel>
+              <FormControl>
+                <Input placeholder="Example:LeoSingh123" type='text' className='shad-input'  {...field}/>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      <FormField
+          control={form.control}
+          name="email"
+          render={({ field }: any) => (
+            <FormItem>
+              <FormLabel className="form-label">Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Example:leosingh123@xyz.com" type='email' className='shad-input'  {...field}/>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      <FormField
+          control={form.control}
+          name="password"
+          render={({ field }: any) => (
+            <FormItem>
+              <FormLabel className="form-label">Password</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter Password" type='password' className='shad-input'  {...field}/>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className='h-14 bg-linear-to-t from-sky-700 to-indigo-500' >
+          {isLoading?(<div className='flex-center gap-2'>
+           <Loader/> Loading...
+          </div>):'Sign up'}
+        </Button>
+        <p className='text-small-regular text-white text-center mt-2'>
+          Already have an account? <Link to='/sign-in' className='text-indigo-500 text-small-semibold ml-1'>Log in</Link>
+        </p>
       </form>
+      </div>
     </Form>
   )
 }
