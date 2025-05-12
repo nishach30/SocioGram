@@ -1,14 +1,54 @@
 import { type INewUser } from "../../types";
 import { ID } from "appwrite";
-import { account } from "./config";
+import { account, appwriteConfig, avatars, databases } from "./config";
+import type { URL } from "url";
 
 export async function createUserAccount(user:INewUser) {
     try{
-        const newAccountData= await account.create(ID.unique(), user.email, user.password, user.name)
-        return newAccountData
+        const newAccount= await account.create(
+            ID.unique(), 
+            user.email, 
+            user.password, 
+            user.name
+        )
+
+        if(!newAccount) throw Error;
+
+        const avatarUrl: any = avatars.getInitials(user.name);
+
+        const newUser = await saveUserToDB({
+            accountId: newAccount.$id,
+            name: newAccount.name,
+            email: newAccount.email,
+            username: user.username,
+            imageUrl: avatarUrl,
+        });
+
+        return newUser;
     }catch(error){
         console.log(error)
         return error
     }
     
+}
+
+export async function saveUserToDB(user: {
+    accountId: string;
+    email: string;
+    name: string;
+    imageUrl: URL;
+    username: string;
+}){
+    try{
+        const newUser = await databases.createDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userCollectionId,
+            ID.unique(),
+            user,
+        )
+        return newUser;
+    } catch(error){
+        console.log(error);
+    }
+
 }

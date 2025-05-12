@@ -6,6 +6,8 @@ import SignUpForm from './auth/forms/SignUpForm';
 import { Home } from './root/pages';
 import AuthLayout from './auth/AuthLayout';
 import RootLayout from './root/RootLayout';
+import { Toaster, toast } from 'sonner'
+
 function App() {
 
   return (
@@ -20,6 +22,7 @@ function App() {
          <Route index element={<Home/>}/>
       </Route> 
       </Routes>
+      <Toaster />
     </main>
   )
 }
