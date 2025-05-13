@@ -5,7 +5,7 @@ components=(
     form
     input
     label
-    sooner
+    sonner
 )
 
 for component in "${components[@]}"
