@@ -57,21 +57,21 @@ export async function saveUserToDB(user: {
 export async function signInAccount(user: {email: string; password: string}){
     try{
         const isSessionExist = await account.get();
-        // Only one session is allowed at a time
+        // NOTE: Only one session is allowed at a time
         if(isSessionExist){
             await account.deleteSession('current');
            
         }
     } catch(error){
         console.log(error)
-    }
-    try{
-        const session = await account.createEmailPasswordSession(user.email, user.password);
-        
-        return session; 
-    }catch(error){
-        console.log(error)
-    }    
+    }finally{
+        try{
+            const session = await account.createEmailPasswordSession(user.email, user.password);
+            return session; 
+        }catch(error){
+            console.log(error)
+        }  
+    }  
 }
 
 export async function getCurrentUser() {
@@ -93,4 +93,13 @@ export async function getCurrentUser() {
     } catch(error){
         console.log(error)
     }
+}
+
+export async function signOutAccount() {
+    try{
+        const session = await account.deleteSession("current");
+        return session; 
+    }catch(error){
+        console.log(error)
+    }  
 }
