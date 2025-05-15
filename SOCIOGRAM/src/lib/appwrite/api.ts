@@ -56,13 +56,22 @@ export async function saveUserToDB(user: {
 
 export async function signInAccount(user: {email: string; password: string}){
     try{
+        const isSessionExist = await account.get();
+        // Only one session is allowed at a time
+        if(isSessionExist){
+            await account.deleteSession('current');
+           
+        }
+    } catch(error){
+        console.log(error)
+    }
+    try{
         const session = await account.createEmailPasswordSession(user.email, user.password);
-        return session;
         
-    }
-    catch(error){
-        console.log(error);
-    }
+        return session; 
+    }catch(error){
+        console.log(error)
+    }    
 }
 
 export async function getCurrentUser() {

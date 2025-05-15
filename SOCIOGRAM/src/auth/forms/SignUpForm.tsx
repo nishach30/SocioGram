@@ -51,7 +51,7 @@ const SignUpForm = () => {
 
   if(isLoggedIn){
     form.reset();
-    navigate('/home');
+    navigate('/');
   }
 }
 
