@@ -132,3 +132,63 @@
 .form-label{
    color: azure;
 }
+
+.topbar {
+  /* @apply sticky top-0 z-50 md:hidden bg-amber-400 w-full; */
+  background-color: darkslategrey;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  height: max-content;
+}
+.leftsidebar{
+  display: none;
+  padding: 10px 6px;
+  
+  justify-content: space-between;
+  width: 270px;
+  height: 100%;
+  background-color: rgb(27, 27, 31);  
+}
+.leftsidebar-link{
+  font-size: 16px;
+  color: aliceblue;
+  margin: 5px 0px;
+  padding: 7px; 
+  /* line-height: 140%; */
+  font-weight: lighter;
+  display: inline-block;
+  
+}
+.leftsidebar-link-container{
+  /* padding: 7px; */
+  border: 1px solid cyan;
+  background-color: fuchsia;
+  display: block;
+  :hover{
+    display: block;
+    background-color: lavenderblush;
+    border: 1px solid purple;   
+    padding: 0px;  
+  }
+}
+@media only screen and (min-width: 600px) {
+  .leftsidebar {
+    display: flex;
+    flex-direction: column;
+  }
+  .topbar{
+    display: none;
+  }
+}
+.small-regular{
+  font-size: 14px;
+  font-style: normal;
+  line-break:  140%;
+}
+.body-bold{
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 140%;
+}
