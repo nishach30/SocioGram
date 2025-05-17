@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* @import "tailwindcss/preflight" */
+
+/* styles.css */
+/* @tailwind utilities; */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -124,14 +128,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply dark:bg-black;
+    @apply bg-black text-white;
   }
 }
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); 
-
-.form-label{
-   color: azure;
-}
 
 .topbar {
   /* @apply sticky top-0 z-50 md:hidden bg-amber-400 w-full; */
@@ -141,36 +141,24 @@
   z-index: 50;
   width: 100%;
   height: max-content;
+  @apply shadow-xl shadow-gray-500;
 }
+
 .leftsidebar{
   display: none;
-  padding: 10px 6px;
-  
   justify-content: space-between;
   width: 270px;
   height: 100%;
-  background-color: rgb(27, 27, 31);  
+  color: white !important;
+  @apply shadow-xl shadow-gray-500;
 }
+
 .leftsidebar-link{
-  font-size: 16px;
-  color: aliceblue;
-  margin: 5px 0px;
-  padding: 7px; 
-  /* line-height: 140%; */
-  font-weight: lighter;
-  display: inline-block;
-  
-}
-.leftsidebar-link-container{
-  /* padding: 7px; */
-  border: 1px solid cyan;
-  background-color: fuchsia;
   display: block;
-  :hover{
-    display: block;
-    background-color: lavenderblush;
-    border: 1px solid purple;   
-    padding: 0px;  
+  font-size: 16px;
+  font-weight: lighter;
+  :active, :hover{
+    @apply bg-indigo-500 shadow-sm shadow-indigo-400/50;
   }
 }
 @media only screen and (min-width: 600px) {

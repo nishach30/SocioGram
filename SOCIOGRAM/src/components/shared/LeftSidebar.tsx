@@ -36,33 +36,33 @@ const LeftSidebar = () => {
             </p>
           </div>
         </Link>
-        <ul className='flex flex-col gap-6'>
+        <ul className='flex flex-col gap-4'>
           { sidebarLinks.map((link : INavLink, index:number)=>{
-              const isActive= pathname===link.route;
+              const isActive: boolean = pathname === link.route;
               return(
-                <div className='leftsidebar-link-container'>
-                  <li key={index} className={`leftsidebar-link group ${isActive && 'bg-primary-foreground'}`}>
+                  <li key={index} className={`leftsidebar-link group ${isActive && 'bg-indigo-500'}`}>
                   <NavLink to={link.route} className="flex gap-4 items-center p-4">
                     <img 
                       src={link.imgURL}
                       alt={link.label}
-                      className={`group-hover:invert-0 ${isActive && 'invert-0'}`}/>
-                    {link.label}
+                      className={`${isActive ? 'filter invert brightness-0' : 'group-hover:invert group-hover:brightness-0'}`}/>
+                     <span className={`transition`}>
+                      {link.label}
+                    </span>
                 </NavLink>
                 </li>
-                </div>
               )}
             )
           }
         </ul>
       </div>
-      <Button variant='ghost' className='shad-button_ghost'
+      <Button variant='ghost' className='shad-button_ghost mb-2'
                 onClick={()=>signOut()}>
-                    <img src='/assets/icons/logout.svg' alt='logout'/>
-                    <p className='small-medium lg:base-medium'>
-                      Logout
-                    </p>
-                </Button>
+          <img src='/assets/icons/logout.svg' alt='logout'/>
+          <p className='small-medium lg:base-medium'>
+            Logout
+          </p>
+      </Button>
     </nav>
   )
 }
