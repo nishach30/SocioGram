@@ -162,6 +162,39 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); 
 
+/* SHADCN COMPONENTS */
+/* Form */
+.shad-form_label {
+  @apply text-white ;
+}
+
+.shad-form_message {
+  @apply text-red-500;
+}
+
+.shad-input {
+  @apply h-12 bg-gray-700 border-none placeholder:text-amber-50 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-white;
+}
+
+.shad-textarea {
+  @apply h-36 bg-gray-900 rounded-xl border-none focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-white;
+}
+
+/* Button */
+.shad-button_primary {
+  @apply bg-indigo-500 hover:bg-indigo-500 text-amber-50 flex gap-2;
+}
+
+.shad-button_dark_4 {
+  @apply h-12 bg-gray-700 px-5 text-amber-50 flex gap-2;
+}
+
+.shad-button_ghost {
+  @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white;
+}
+
+/* Navbar/Sidebars Styles */
+
 .topbar {
   /* @apply sticky top-0 z-50 md:hidden bg-amber-400 w-full; */
   position: sticky;
@@ -171,9 +204,10 @@
   height: max-content;
   @apply shadow-sm shadow-gray-500;
 }
+
 .bottombar {
  box-shadow: 3px 0px 0px 1px var(--color-gray-500), 2px -1px 0px 1px var(--color-gray-500) ;
- @apply z-50 flex justify-between items-center w-full sticky bottom-0  px-5 py-4 ;
+ @apply z-50 bg-black flex justify-between items-center w-full sticky bottom-0  px-5 py-4 ;
 
 }
 
@@ -194,7 +228,7 @@
     @apply bg-indigo-500 shadow-sm shadow-indigo-400/50;
   }
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 750px) {
   .leftsidebar {
     display: flex;
     flex-direction: column;
@@ -205,5 +239,11 @@
   .bottombar{
     display: none;
   }
-  
 }
+
+
+/* Create Post Styles */
+ .common-container {
+    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14;
+    /* custom-scrollbar */
+  }

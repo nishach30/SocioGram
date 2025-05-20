@@ -6,6 +6,7 @@ components=(
     input
     label
     sonner
+    textarea
 )
 
 for component in "${components[@]}"
