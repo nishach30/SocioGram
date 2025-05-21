@@ -160,6 +160,26 @@
  @apply flex justify-center items-center;
 }
 
+/*custom scrollbar  */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #09090a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #5c5c7b;
+  border-radius: 50px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #7878a3;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *)); 
 
 /* SHADCN COMPONENTS */
@@ -196,54 +216,24 @@
 /* Navbar/Sidebars Styles */
 
 .topbar {
-  /* @apply sticky top-0 z-50 md:hidden bg-amber-400 w-full; */
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  width: 100%;
-  height: max-content;
-  @apply shadow-sm shadow-gray-500;
+  @apply sticky top-0 z-50 md:hidden bg-black w-full shadow-sm shadow-gray-500;
 }
 
 .bottombar {
  box-shadow: 3px 0px 0px 1px var(--color-gray-500), 2px -1px 0px 1px var(--color-gray-500) ;
- @apply z-50 bg-black flex justify-between items-center w-full sticky bottom-0  px-5 py-4 ;
+ @apply z-50 bg-black flex md:hidden justify-between items-center w-full sticky bottom-0  px-5 py-4 ;
 
 }
 
-.leftsidebar{
-  display: none;
-  justify-content: space-between;
-  width: 270px;
-  height: 100%;
-  color: white !important;
-  @apply shadow-xl shadow-gray-500;
+.leftsidebar {
+  @apply hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-black shadow-xl shadow-gray-500;
 }
 
-.leftsidebar-link{
-  display: block;
-  font-size: 16px;
-  font-weight: lighter;
-  :active, :hover{
-    @apply bg-indigo-500 shadow-sm shadow-indigo-400/50;
-  }
+.leftsidebar-link {
+  @apply rounded-lg text-[16px] font-medium leading-[140%] hover:bg-indigo-500 transition ;
 }
-@media only screen and (min-width: 750px) {
-  .leftsidebar {
-    display: flex;
-    flex-direction: column;
-  }
-  .topbar {
-    display: none;
-  }
-  .bottombar{
-    display: none;
-  }
-}
-
 
 /* Create Post Styles */
  .common-container {
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14;
-    /* custom-scrollbar */
   }
