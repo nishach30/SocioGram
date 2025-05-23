@@ -1,4 +1,3 @@
-import React from 'react'
 import Loader from '../../components/shared/Loader';
 import { useGetRecentPosts } from '../../lib/react-query/queriesAndMutation';
 import type { Models } from 'appwrite';
@@ -6,6 +5,7 @@ import PostCard from '../../components/shared/PostCard';
 
 const Home = () => {
   const {data: posts, isPending:isPostLoading, isError: isErrorPosts} = useGetRecentPosts();
+  
   return (
     <div className='flex flex-1'>
       <div className='home-container'>
