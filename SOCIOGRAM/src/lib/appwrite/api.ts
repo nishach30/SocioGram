@@ -4,7 +4,6 @@ import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import type { URL } from "url";
 import { Query } from "appwrite"
 
-
 export async function createUserAccount(user:INewUser) {
     try{
         const newAccount= await account.create(
