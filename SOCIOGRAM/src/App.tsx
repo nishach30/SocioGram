@@ -6,7 +6,7 @@ import SignUpForm from './auth/forms/SignUpForm';
 import { AllUsers, CreatePost, EditPost, Explore, Home, PostDetails, Profile, Saved, UpdateProfile } from './root/pages';
 import AuthLayout from './auth/AuthLayout';
 import RootLayout from './root/RootLayout';
-import { Toaster, toast } from 'sonner'
+import { Toaster } from 'sonner'
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
          <Route path="/all-users" element={<AllUsers/>}/>
          <Route path="/create-post" element={<CreatePost/>}/>
          <Route path="/update-post/:id" element={<EditPost/>}/>
-         <Route path="/posts/:id" element={<PostDetails/>}/>
+         <Route path="/post/:id" element={<PostDetails/>}/>
          <Route path="/profile/:id/*" element={<Profile/>}/>
          <Route path="/update-profile/:id" element={<UpdateProfile/>}/>
 
