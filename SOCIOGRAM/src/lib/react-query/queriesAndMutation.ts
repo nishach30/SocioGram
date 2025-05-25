@@ -1,6 +1,6 @@
 //for infinite scrolling, caching, paging etc
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { createUserAccount, signInAccount, signOutAccount, createPost, getRecentPosts, LikePost, SavePost, DeleteSavedPost, getCurrentUser, getPostByID, updatePost, deletePost } from '../appwrite/api'
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query'
+import { createUserAccount, signInAccount, signOutAccount, createPost, getRecentPosts, LikePost, SavePost, DeleteSavedPost, getCurrentUser, getPostByID, updatePost, deletePost, getInfinitePosts, searchPosts } from '../appwrite/api'
 import type { INewPost, INewUser, IUpdatePost } from '../../types'
 import { QUERY_KEYS } from './queryKeys'
 
@@ -143,5 +143,26 @@ export const useDeletePost = () => {
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
       })
     }
+  })
+}
+
+export const useGetPosts = () =>{
+  return useInfiniteQuery({
+    queryKey:[QUERY_KEYS.GET_INFINITE_POSTS],
+    queryFn: getInfinitePosts,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage:any)=>{
+      if(lastPage && lastPage.documents.length ===0) return null;
+      const lastId= lastPage.documents[lastPage?.documents.length-1].$id;
+      return lastId
+    }
+  })
+}
+
+export const userSearchPosts = (searchTerm: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.SEARCH_POSTS],
+    queryFn: () => searchPosts(searchTerm),
+    enabled:!!searchTerm
   })
 }
