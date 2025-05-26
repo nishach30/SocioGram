@@ -365,11 +365,27 @@ export async function searchPosts(searchTerm: string){
     const posts= await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.postCollectionId,
-      [Query.search('caption', searchTerm)]
+      [Query.contains('caption', searchTerm)]
     )
     if(!posts) throw Error
     return posts
   }catch(error){
+    console.log(error);
+  }
+}
+
+export async function getSavedPost(){
+  try{
+    const currentAccount = await account.get();
+    if(!currentAccount) throw Error;
+    const savedPosts= await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+     [Query.equal('accountId', currentAccount.$id)]
+    )
+    console.log("[] saved post", savedPosts.documents[0].save)
+    return savedPosts.documents[0].save;
+  }  catch(error){
     console.log(error);
   }
 }
