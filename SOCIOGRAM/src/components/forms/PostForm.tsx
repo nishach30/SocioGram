@@ -61,6 +61,10 @@ const PostForm = ({post, action}: PostFormProps) => {
         }
         navigate('/');
     }
+
+    const handleOnCancel = ()=>{
+        navigate('/')
+    }
     
   return (
 	<Form {...form}>
@@ -124,7 +128,8 @@ const PostForm = ({post, action}: PostFormProps) => {
             />
 
             <div className="flex gap-4 items-center justify-end">
-                <Button type="button" className="shad-button_dark_4">
+                <Button type="button" className="shad-button_secondary whitespace-nowrap"
+                onClick={handleOnCancel}>
                     Cancel
                 </Button>
                 <Button type="submit" disabled={isLoadingCreate || isLoadingUpdate} className="shad-button_primary whitespace-nowrap">
