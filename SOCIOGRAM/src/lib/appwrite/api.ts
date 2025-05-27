@@ -1,7 +1,6 @@
 import { type INewPost, type INewUser, type IUpdatePost } from "../../types";
 import { ID, ImageGravity } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
-import type { URL } from "url";
 import { Query } from "appwrite"
 
 export async function createUserAccount(user:INewUser) {
@@ -221,11 +220,13 @@ export async function LikePost(postId: string, likesArray: string[]){
 
 export async function SavePost(postId: string, userId: string){
     try {
+      const currentAccount = await account.get();
       const updatedPost = await databases.createDocument(
         appwriteConfig.databaseId,
         appwriteConfig.savesCollectionId,
         ID.unique(),
         {
+          accountId: currentAccount.$id,
           user: [userId],
           post: postId
         }
@@ -294,7 +295,7 @@ export async function updatePost(post: IUpdatePost) {
           throw Error;
         }
 
-        image = {...image, imageUrl: fileUrl, imageId: uploadedFile.$id}
+        image = {...image, imageUrl: new URL(fileUrl), imageId: uploadedFile.$id}
       }
     
       // Convert tags into array
@@ -378,13 +379,14 @@ export async function getSavedPost(){
   try{
     const currentAccount = await account.get();
     if(!currentAccount) throw Error;
-    const savedPosts= await databases.listDocuments(
+
+    const savedPosts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.userCollectionId,
-     [Query.equal('accountId', currentAccount.$id)]
+      appwriteConfig.savesCollectionId,
+      [Query.equal('accountId', currentAccount.$id)]
     )
-    console.log("[] saved post", savedPosts.documents[0].save)
-    return savedPosts.documents[0].save;
+    return savedPosts;
+
   }  catch(error){
     console.log(error);
   }
