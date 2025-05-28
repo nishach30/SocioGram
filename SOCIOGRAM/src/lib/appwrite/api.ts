@@ -391,3 +391,19 @@ export async function getSavedPost(){
     console.log(error);
   }
 }
+
+export async function getAllUsers(){
+  try{
+    const currentAccount = await account.get();
+    if(!currentAccount) throw Error;
+
+    const allUsers = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.notEqual('accountId', currentAccount.$id)]
+    )
+    return allUsers;
+  }catch(error){
+    console.log(error);
+  }
+}
