@@ -5,39 +5,39 @@ import type { INewPost, INewUser, IUpdatePost } from '../../types'
 import { QUERY_KEYS } from './queryKeys'
 
 export const useCreateUserAccount = () => {
-    return useMutation({
-        mutationFn: (user: INewUser) => createUserAccount(user),
-    })
+  return useMutation({
+    mutationFn: (user: INewUser) => createUserAccount(user),
+  })
 }
 
 export const useSignInAccount = () => {
-    return useMutation({
-        mutationFn: (user: {
-        email: string;
-        password: string;
+  return useMutation({
+    mutationFn: (user: {
+      email: string;
+      password: string;
     }) => signInAccount(user),
-    });
+  });
 }
 
 export const useSignOutAccount = () => {
-    return useMutation({
-        mutationFn: signOutAccount
-    });
+  return useMutation({
+    mutationFn: signOutAccount
+  });
 }
 
 export const useCreatePost = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-      mutationFn: (post: INewPost) => createPost(post),
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-        });
-      },
-    });
-  };
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (post: INewPost) => createPost(post),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+      });
+    },
+  });
+};
 
-export const useGetRecentPosts = ()=>{
+export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
     queryFn: getRecentPosts,
@@ -46,9 +46,9 @@ export const useGetRecentPosts = ()=>{
 
 export const useLikePost = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: ({postId, likesArray}: { postId: string; likesArray: string[]}) => LikePost(postId, likesArray),
+    mutationFn: ({ postId, likesArray }: { postId: string; likesArray: string[] }) => LikePost(postId, likesArray),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
@@ -68,11 +68,11 @@ export const useLikePost = () => {
 
 export const useSavePost = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: ({postId, userId}: { postId: string; userId: string}) => SavePost(postId, userId),
+    mutationFn: ({ postId, userId }: { postId: string; userId: string }) => SavePost(postId, userId),
     onSuccess: () => {
-       queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS]
       })
       queryClient.invalidateQueries({
@@ -87,11 +87,11 @@ export const useSavePost = () => {
 
 export const useDeleteSavedPost = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: (savedRecordId: string) => DeleteSavedPost(savedRecordId),
     onSuccess: () => {
-       queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS]
       })
       queryClient.invalidateQueries({
@@ -125,7 +125,7 @@ export const useUpdatePost = () => {
 
   return useMutation({
     mutationFn: (post: IUpdatePost) => updatePost(post),
-    onSuccess: (data)=>{
+    onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id]
       })
@@ -137,8 +137,8 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({postId, imageId}: {postId: string, imageId: string}) => deletePost(postId, imageId),
-    onSuccess: ()=>{
+    mutationFn: ({ postId, imageId }: { postId: string, imageId: string }) => deletePost(postId, imageId),
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
       })
@@ -146,16 +146,17 @@ export const useDeletePost = () => {
   })
 }
 
-export const useGetPosts = () =>{
+export const useGetPosts = () => {
   return useInfiniteQuery({
-    queryKey:[QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn: getInfinitePosts,
-    initialPageParam: 0,
-    getNextPageParam: (lastPage:any)=>{
-      if(lastPage && lastPage.documents.length ===0) return null;
-      const lastId= lastPage.documents[lastPage?.documents.length-1].$id;
-      return lastId
-    }
+    queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
+    initialPageParam: { direction: 'next', cursor: null },
+    queryFn: ({ pageParam }: { pageParam: any }) => getInfinitePosts(pageParam),
+    getNextPageParam: (lastPage: any) => {
+      if (!lastPage || lastPage.documents.length === 0) return null;
+
+      const lastDoc = lastPage.documents[lastPage.documents.length - 1];
+      return { direction: 'next', cursor: lastDoc.$id };
+    },
   })
 }
 
@@ -163,20 +164,20 @@ export const useSearchPosts = (searchTerm: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
     queryFn: () => searchPosts(searchTerm),
-    enabled:!!searchTerm
+    enabled: !!searchTerm
   })
 }
 
-export const useGetSavedPosts = () =>{
+export const useGetSavedPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_SAVED_POSTS],
-    queryFn: ()=> getSavedPost()
+    queryFn: () => getSavedPost()
   })
 }
 
-export const useGetAllUsers = () =>{
+export const useGetAllUsers = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_ALL_USERS],
-    queryFn: ()=> getAllUsers()
+    queryFn: () => getAllUsers()
   })
 }
