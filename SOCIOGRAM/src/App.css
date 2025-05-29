@@ -412,3 +412,13 @@
 .grid-post_user {
   @apply absolute bottom-0 p-5 flex justify-between items-center w-full bg-gradient-to-t from-gray-900 to-transparent rounded-b-[24px] gap-2;
 }
+
+/* All users List */
+.all_user-container{
+  @apply  w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-10  max-w-5xl;
+}
+
+.user-card {
+  @apply bg-gray-900 flex flex-col justify-center items-center gap-4 rounded-3xl border border-gray-900 p-5 lg:p-7 w-[200px] h-[250px]  ;
+}
+
