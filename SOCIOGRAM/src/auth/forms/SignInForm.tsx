@@ -65,7 +65,7 @@ return (
 		<FormField
 				control={form.control}
 				name="email"
-				render={({ field }: any) => (
+				render={({ field }: unknown) => (
 					<FormItem>
 						<FormLabel className="form-label">Email</FormLabel>
 						<FormControl>
@@ -78,7 +78,7 @@ return (
 		<FormField
 				control={form.control}
 				name="password"
-				render={({ field }: any) => (
+				render={({ field }: unknown) => (
 					<FormItem>
 						<FormLabel className="form-label">Password</FormLabel>
 						<FormControl>

@@ -14,14 +14,14 @@ export async function createUserAccount(user: INewUser) {
 
     if (!newAccount) throw Error;
 
-    const avatarUrl: any = avatars.getInitials(user.name);
+    const avatarUrl = avatars.getInitials(user.name);
 
     const newUser = await saveUserToDB({
       accountId: newAccount.$id,
       name: newAccount.name,
       email: newAccount.email,
       username: user.username,
-      imageUrl: avatarUrl,
+      imageUrl: new URL(avatarUrl),
     });
 
     return newUser;
@@ -59,17 +59,15 @@ export async function signInAccount(user: { email: string; password: string }) {
     // NOTE: Only one session is allowed at a time
     if (isSessionExist) {
       await account.deleteSession('current');
-
     }
   } catch (error) {
     console.log(error)
-  } finally {
-    try {
-      const session = await account.createEmailPasswordSession(user.email, user.password);
-      return session;
-    } catch (error) {
-      console.log(error)
-    }
+  }
+  try {
+    const session = await account.createEmailPasswordSession(user.email, user.password);
+    return session;
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -347,7 +345,7 @@ type PageParam = {
 };
 
 export async function getInfinitePosts({ direction = 'next', cursor }: PageParam) {
-  const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(6)]
+  const queries = [Query.orderDesc('$updatedAt'), Query.limit(6)]
 
   if (cursor) {
     if (direction === 'next') {
