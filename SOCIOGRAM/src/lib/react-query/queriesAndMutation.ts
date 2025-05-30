@@ -150,8 +150,8 @@ export const useGetPosts = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
     initialPageParam: { direction: 'next', cursor: null },
-    queryFn: ({ pageParam }: { pageParam: any }) => getInfinitePosts(pageParam),
-    getNextPageParam: (lastPage: any) => {
+    queryFn: ({ pageParam }: { pageParam: unknown }) => getInfinitePosts(pageParam),
+    getNextPageParam: (lastPage: unknown) => {
       if (!lastPage || lastPage.documents.length === 0) return null;
 
       const lastDoc = lastPage.documents[lastPage.documents.length - 1];

@@ -1,9 +1,9 @@
-import Loader from './Loader';
-import GridPostList from './GridPostList';
+import Loader from "./Loader";
+import GridPostList from "./GridPostList";
 
 type SearchResultsProps = {
   isSearchFetching: boolean;
-  searchedPosts: any;
+  searchedPosts: unknown;
 };
 const SearchResults = ({
   isSearchFetching,
