@@ -80,7 +80,7 @@ const Explore = () => {
           <Loader />
         </div>
       )}
-      {!hasNextPage && (
+      {!hasNextPage && !shouldShowSearchResults && (
         <p className="text-gray-100 mt-0 text-center w-full">
           You are all caught up!!
         </p>
