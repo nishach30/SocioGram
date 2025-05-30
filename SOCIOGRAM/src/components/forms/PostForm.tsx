@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import FileUploader from "../shared/FileUploader";
 import { Input } from "../ui/input";
 import type { Models } from "appwrite";
-import { PostValidation } from '../../../src/lib/validation'
+import { PostValidation } from '@/../src/lib/validation'
 import { useUserContext } from "../../context/AuthContext";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";

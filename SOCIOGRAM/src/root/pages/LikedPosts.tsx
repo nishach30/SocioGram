@@ -1,11 +1,5 @@
-import React from 'react'
-
 const LikedPsosts = () => {
-  return (
-    <div>
-      Liked
-    </div>
-  )
-}
+  return <div>Liked</div>;
+};
 
-export default LikedPsosts
+export default LikedPsosts;

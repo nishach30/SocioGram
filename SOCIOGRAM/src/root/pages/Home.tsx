@@ -1,14 +1,10 @@
-import Loader from "../../components/shared/Loader";
-import { useGetRecentPosts } from "../../lib/react-query/queriesAndMutation";
-import type { Models } from "appwrite";
-import PostCard from "../../components/shared/PostCard";
+import Loader from '../../components/shared/Loader';
+import { useGetRecentPosts } from '../../lib/react-query/queriesAndMutation';
+import type { Models } from 'appwrite';
+import PostCard from '../../components/shared/PostCard';
 
 const Home = () => {
-  const {
-    data: posts,
-    isPending: isPostLoading,
-    isError: isErrorPosts,
-  } = useGetRecentPosts();
+  const { data: posts, isPending: isPostLoading } = useGetRecentPosts();
   if (isPostLoading) {
     return <Loader />;
   }
