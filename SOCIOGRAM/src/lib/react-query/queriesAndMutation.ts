@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tansta
 import { createUserAccount, signInAccount, signOutAccount, createPost, getRecentPosts, LikePost, SavePost, DeleteSavedPost, getCurrentUser, getPostByID, updatePost, deletePost, getInfinitePosts, searchPosts, getSavedPost, getAllUsers } from '../appwrite/api'
 import type { INewPost, INewUser, IUpdatePost } from '@/types'
 import { QUERY_KEYS } from './queryKeys'
+import type { PageParam1 } from '@/constants'
 
 export const useCreateUserAccount = () => {
   return useMutation({
@@ -149,9 +150,9 @@ export const useDeletePost = () => {
 export const useGetPosts = () => {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-    initialPageParam: { direction: 'next', cursor: null },
-    queryFn: ({ pageParam }: { pageParam: unknown }) => getInfinitePosts(pageParam),
-    getNextPageParam: (lastPage: unknown) => {
+    initialPageParam: { direction: 'next', cursor: '' },
+    queryFn: ({pageParam} : PageParam1) => getInfinitePosts(pageParam),
+    getNextPageParam: (lastPage) => {
       if (!lastPage || lastPage.documents.length === 0) return null;
 
       const lastDoc = lastPage.documents[lastPage.documents.length - 1];

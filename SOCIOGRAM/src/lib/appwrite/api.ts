@@ -2,7 +2,7 @@ import { type INewPost, type INewUser, type IUpdatePost } from "../../types";
 import { ID, ImageGravity } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { Query } from "appwrite"
-
+import type { PageParam } from "@/constants";
 export async function createUserAccount(user: INewUser) {
   try {
     const newAccount = await account.create(
@@ -339,12 +339,8 @@ export async function deletePost(postId: string, imageId: string) {
   }
 }
 
-type PageParam = {
-  direction: 'next' | 'prev';
-  cursor: string | null;
-};
 
-export async function getInfinitePosts({ direction = 'next', cursor }: PageParam) {
+export async function getInfinitePosts({ direction = 'next', cursor = '' }: PageParam) {
   const queries = [Query.orderDesc('$updatedAt'), Query.limit(6)]
 
   if (cursor) {
