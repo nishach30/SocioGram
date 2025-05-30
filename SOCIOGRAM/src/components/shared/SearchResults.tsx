@@ -5,7 +5,9 @@ import type { Models } from "appwrite";
 type SearchResultsProps = {
   isSearchFetching: boolean;
   searchedPosts: Models.Document;
+
 };
+
 const SearchResults = ({
   isSearchFetching,
   searchedPosts,
