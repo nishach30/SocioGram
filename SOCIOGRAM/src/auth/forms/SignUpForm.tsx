@@ -81,7 +81,7 @@ const SignUpForm = () => {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }: unknown) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="form-label">Name</FormLabel>
                 <FormControl>
@@ -99,7 +99,7 @@ const SignUpForm = () => {
           <FormField
             control={form.control}
             name="username"
-            render={({ field }: unknown) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="form-label">Username</FormLabel>
                 <FormControl>
@@ -117,7 +117,7 @@ const SignUpForm = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }: unknown) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="form-label">Email</FormLabel>
                 <FormControl>
@@ -135,7 +135,7 @@ const SignUpForm = () => {
           <FormField
             control={form.control}
             name="password"
-            render={({ field }: unknown) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel className="form-label">Password</FormLabel>
                 <FormControl>
