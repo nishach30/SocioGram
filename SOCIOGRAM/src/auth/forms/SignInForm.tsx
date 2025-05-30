@@ -1,4 +1,4 @@
-import { Button } from '../../components/ui/button'
+import { Button } from '@/components/ui/button'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -11,12 +11,12 @@ FormMessage,
 } from "../../components/ui/form"
 import { Input } from "../../components/ui/input"
 import { z } from "zod"
-import { SigninValidation } from '../../lib/validation'
-import Loader from '../../components/shared/Loader'
+import { SigninValidation } from '@/lib/validation'
+import Loader from '@/components/shared/Loader'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from "sonner"
-import {  useSignInAccount } from '../../lib/react-query/queriesAndMutation'
-import { useUserContext } from '../../context/AuthContext'
+import {  useSignInAccount } from '@/lib/react-query/queriesAndMutation'
+import { useUserContext } from '@/context/AuthContext'
 
 const SignInForm = () => {
 const {mutateAsync: signInAccount} = useSignInAccount();

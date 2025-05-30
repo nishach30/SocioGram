@@ -1,7 +1,7 @@
 //for infinite scrolling, caching, paging etc
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from '@tanstack/react-query'
 import { createUserAccount, signInAccount, signOutAccount, createPost, getRecentPosts, LikePost, SavePost, DeleteSavedPost, getCurrentUser, getPostByID, updatePost, deletePost, getInfinitePosts, searchPosts, getSavedPost, getAllUsers } from '../appwrite/api'
-import type { INewPost, INewUser, IUpdatePost } from '../../types'
+import type { INewPost, INewUser, IUpdatePost } from '@/types'
 import { QUERY_KEYS } from './queryKeys'
 
 export const useCreateUserAccount = () => {

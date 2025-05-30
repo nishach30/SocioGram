@@ -1,7 +1,7 @@
-import { useGetAllUsers } from '../../lib/react-query/queriesAndMutation';
-import Loader from '../../components/shared/Loader';
+import { useGetAllUsers } from '@/lib/react-query/queriesAndMutation';
+import Loader from '@/components/shared/Loader';
 import type { Models } from 'appwrite';
-import UserCard from '../../components/shared/UserCard';
+import UserCard from '@/components/shared/UserCard';
 
 const AllUsers = () => {
   const {data:allUsers , isPending}= useGetAllUsers();

@@ -1,7 +1,7 @@
 import type { Models } from 'appwrite'
 import React, { useState, useEffect } from 'react'
-import { useDeleteSavedPost, useGetCurrentUser, useLikePost, useSavePost } from '../../lib/react-query/queriesAndMutation';
-import { checkIsLiked } from '../../lib/utils';
+import { useDeleteSavedPost, useGetCurrentUser, useLikePost, useSavePost } from '@/lib/react-query/queriesAndMutation';
+import { checkIsLiked } from '@/lib/utils';
 import Loader from './Loader';
 
 type PostStatsProps ={

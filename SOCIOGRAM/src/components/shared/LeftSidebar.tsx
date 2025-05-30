@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
-import { useSignOutAccount } from '../../lib/react-query/queriesAndMutation';
-import { useUserContext } from '../../context/AuthContext';
-import { sidebarLinks } from '../../constants';
-import type { INavLink } from '../../types';
+import { useSignOutAccount } from '@/lib/react-query/queriesAndMutation';
+import { useUserContext } from '@/context/AuthContext';
+import { sidebarLinks } from '@/constants';
+import type { INavLink } from '@/types';
 const LeftSidebar = () => {
   const { mutate: signOut, isSuccess } = useSignOutAccount();
   const navigate = useNavigate();

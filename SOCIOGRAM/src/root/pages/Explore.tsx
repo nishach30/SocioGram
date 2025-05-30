@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Input } from '../../components/ui/input';
-import GridPostList from '../../components/shared/GridPostList';
+import { useEffect, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import GridPostList from '@/components/shared/GridPostList';
 import {
   useGetPosts,
   useSearchPosts,
-} from '../../lib/react-query/queriesAndMutation';
-import useDebounce from '../../hooks/useDebounce';
-import Loader from '../../components/shared/Loader';
-import SearchResults from '../../components/shared/Searchresults';
+} from '@/lib/react-query/queriesAndMutation';
+import useDebounce from '@/hooks/useDebounce';
+import Loader from '@/components/shared/Loader';
+import SearchResults from '@/components/shared/SearchResults';
 import { useInView } from 'react-intersection-observer';
 
 const Explore = () => {
@@ -77,7 +77,7 @@ const Explore = () => {
       </div>
       {hasNextPage && !searchValue && (
         <div ref={ref} className="mt-10">
-          <Loader /> Next
+          <Loader />
         </div>
       )}
       {!hasNextPage && (
