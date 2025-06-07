@@ -53,12 +53,13 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
             console.log(error);
         } finally {
             setIsLoading(false);
+            return false;
         }
     };
 
     useEffect(()=>{
         const cookieValue = localStorage.getItem('cookieFallback');
-        if(cookieValue === '[]' || cookieValue === null || cookieValue === undefined){
+        if(cookieValue === '[]' || cookieValue === null){
             navigate('/sign-in');
         }
 
