@@ -66,5 +66,5 @@ export type PageParam1 = {
         cursor: string;
     };
     direction:  'forward' | 'backward';
-    meta: QueryMeta | undefined;
+    meta: QueryMeta;
 }
