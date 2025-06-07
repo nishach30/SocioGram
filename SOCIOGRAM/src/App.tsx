@@ -30,6 +30,9 @@ function App() {
          <Route path="/update-profile/:id" element={<UpdateProfile/>}/>
 
       </Route> 
+      
+      <Route path="*" element={<div className='p-4 text-center text-red-500 text-xl'>404 - Page Not Found</div>} />
+
       </Routes>
       <Toaster />
     </main>
