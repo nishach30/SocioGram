@@ -21,6 +21,8 @@ const Explore = () => {
   useEffect(() => {
     if (inView && !searchValue) fetchNextPage();
   }, [inView, searchValue]);
+  
+  const shouldShowSearchResults = searchValue !== '';
 
   if (!posts) {
     return (
@@ -29,7 +31,6 @@ const Explore = () => {
       </div>
     );
   }
-  const shouldShowSearchResults = searchValue !== '';
 
   return (
     <div className="explore-container">
@@ -64,16 +65,19 @@ const Explore = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
-        {shouldShowSearchResults ? (
-          <SearchResults
-            isSearchFetching={isSearchFetching}
-            searchedPosts={searchedPosts}
-          />
-        ) : (
-          posts.pages.map((item, index) => (
-            <GridPostList key={`page-${index}`} posts={item?.documents} />
-          ))
-        )}
+        {shouldShowSearchResults
+          ? (
+              searchedPosts && <SearchResults
+                isSearchFetching={isSearchFetching}
+                searchedPosts={searchedPosts}
+              />
+            )
+          : posts.pages.map((item, index) => (
+              <GridPostList
+                key={`page-${index}`}
+                posts={item?.documents || []}
+              />
+            ))}
       </div>
       {hasNextPage && !searchValue && (
         <div ref={ref} className="mt-10">
