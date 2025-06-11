@@ -415,10 +415,28 @@
 
 /* All users List */
 .all_user-container{
-  @apply  w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 p-10  max-w-5xl;
+  @apply  w-full overflow-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-10 place-items-center ;
 }
 
 .user-card {
-  @apply bg-gray-900 flex flex-col justify-center items-center gap-4 rounded-3xl border border-gray-900 p-5 lg:p-7 w-[200px] h-[250px]  ;
+  @apply bg-gray-900 flex flex-col justify-center items-center gap-4 m-4 rounded-3xl border border-gray-900 p-5 lg:p-7 w-[200px] h-[250px]  ;
 }
 
+.all_user-container::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.all_user-container::-webkit-scrollbar-track {
+  background: #09090a;
+}
+
+.all_user-container::-webkit-scrollbar-thumb {
+  background: #5c5c7b;
+  border-radius: 50px;
+}
+
+.all_user-container::-webkit-scrollbar-thumb:hover {
+  background: #cf0f18;
+}
