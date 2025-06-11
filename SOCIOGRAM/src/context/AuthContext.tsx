@@ -53,7 +53,7 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
             console.log(error);
         } finally {
             setIsLoading(false);
-            return false;
+            return true;
         }
     };
 
