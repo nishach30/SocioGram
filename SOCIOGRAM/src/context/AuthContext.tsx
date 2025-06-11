@@ -44,17 +44,15 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
                 })
 
                 setIsAuthenticated(true);
+                setIsLoading(false);
                 return true;
             }
 
-            return false;
-
         } catch(error) {
             console.log(error);
-        } finally {
-            setIsLoading(false);
-            return true;
-        }
+        } 
+        setIsLoading(false);
+        return false;
     };
 
     useEffect(()=>{
