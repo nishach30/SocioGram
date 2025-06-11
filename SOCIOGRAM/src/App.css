@@ -415,7 +415,7 @@
 
 /* All users List */
 .all_user-container{
-  @apply  w-full overflow-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-10 ;
+  @apply  w-full overflow-scroll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-10 place-items-center ;
 }
 
 .user-card {
