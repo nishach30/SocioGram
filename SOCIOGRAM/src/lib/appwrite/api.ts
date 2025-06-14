@@ -1,5 +1,5 @@
 import { type INewPost, type INewUser, type IUpdatePost } from "../../types";
-import { ID, ImageGravity } from "appwrite";
+import { ID } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { Query } from "appwrite"
 import type { PageParam } from "@/constants";
